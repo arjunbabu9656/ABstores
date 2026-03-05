@@ -1,0 +1,27 @@
+version: "1"
+
+services:
+  - type: web
+    name: ABstores
+    env: python
+    buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate"
+    startCommand: "gunicorn ecommerce_project.wsgi:application"
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.0"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ABstores-DB
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ALLOWED_HOSTS
+        value: "*"
+      - key: DEBUG
+        value: "False"
+
+databases:
+  - name: ABstores-DB
+    databaseName: ecommerce_db
+    user: store_user
+    plan: free
