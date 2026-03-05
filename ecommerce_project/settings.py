@@ -95,9 +95,16 @@ DATABASES = {
 }
 
 # Override database settings with DATABASE_URL if in production
-db_from_env = dj_database_url.config(conn_max_age=600)
-if db_from_env:
-    DATABASES['default'].update(db_from_env)
+if 'RENDER' in os.environ:
+    # On Render, fallback to SQLite if no database URL is set so the app doesn't crash 
+    DATABASES['default'] = dj_database_url.config(
+        default='sqlite:///' + str(BASE_DIR / 'db.sqlite3'),
+        conn_max_age=600
+    )
+else:
+    db_from_env = dj_database_url.config(conn_max_age=600)
+    if db_from_env:
+        DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
