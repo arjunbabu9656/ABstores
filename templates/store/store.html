@@ -2,9 +2,9 @@
 {% load static %}
 
 {% block content %}
-<div style="display: flex; gap: 2rem;">
+<div class="store-layout" style="display: flex; gap: 2rem;">
     <!-- Sidebar / Filters -->
-    <aside style="width: 250px; flex-shrink: 0;">
+    <aside class="store-sidebar" style="width: 250px; flex-shrink: 0;">
         <div
             style="background: white; padding: 1.5rem; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); margin-bottom: 2rem;">
             <h3
@@ -50,11 +50,14 @@
 
                     <div style="margin-top: 1rem;">
                         {% if product.discount > 0 %}
-                        <span style="font-size: 1.25rem; font-weight: 700; color: var(--text-main);">${{ product.get_discounted_price }}</span>
+                        <span style="font-size: 1.25rem; font-weight: 700; color: var(--text-main);">${{
+                            product.get_discounted_price }}</span>
                         <span
-                            style="font-size: 0.875rem; color: var(--text-muted); text-decoration: line-through; margin-left: 0.5rem;">${{ product.price }}</span>
+                            style="font-size: 0.875rem; color: var(--text-muted); text-decoration: line-through; margin-left: 0.5rem;">${{
+                            product.price }}</span>
                         {% else %}
-                        <span style="font-size: 1.25rem; font-weight: 700; color: var(--text-main);">${{ product.price }}</span>
+                        <span style="font-size: 1.25rem; font-weight: 700; color: var(--text-main);">${{ product.price
+                            }}</span>
                         {% endif %}
                     </div>
                     <a href="{% url 'add_cart' product.id %}" class="btn btn-primary"
