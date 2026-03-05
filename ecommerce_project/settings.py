@@ -102,8 +102,8 @@ if 'RENDER' in os.environ:
         conn_max_age=600
     )
 else:
-    db_from_env = dj_database_url.config(conn_max_age=600)
-    if db_from_env:
+    if 'DATABASE_URL' in os.environ:
+        db_from_env = dj_database_url.config(conn_max_age=600)
         DATABASES['default'].update(db_from_env)
 
 # Password validation
