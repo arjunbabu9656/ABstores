@@ -92,7 +92,7 @@
                                             }}</small></span>
                                 </td>
                                 <td style="padding: 0.5rem 0; text-align: right; font-weight: 600;">
-                                    ${{ cart_item.sub_total }}
+                                    ₹{{ cart_item.sub_total }}
                                 </td>
                             </tr>
                             {% endfor %}
@@ -102,19 +102,19 @@
                     <div
                         style="display: flex; justify-content: space-between; margin-bottom: 0.75rem; color: var(--text-muted);">
                         <span>Subtotal:</span>
-                        <span style="font-weight: 600; color: var(--text-main);">${{ total }}</span>
+                        <span style="font-weight: 600; color: var(--text-main);">₹{{ total }}</span>
                     </div>
 
                     <div
                         style="display: flex; justify-content: space-between; margin-bottom: 1.25rem; color: var(--text-muted);">
                         <span>Tax:</span>
-                        <span style="font-weight: 600; color: var(--text-main);">${{ tax }}</span>
+                        <span style="font-weight: 600; color: var(--text-main);">₹{{ tax }}</span>
                     </div>
 
                     <div
                         style="display: flex; justify-content: space-between; margin-bottom: 2rem; border-top: 1px solid var(--border-color); padding-top: 1rem; font-size: 1.25rem; font-weight: 700;">
                         <span>Total:</span>
-                        <span>${{ grand_total }}</span>
+                        <span>₹{{ grand_total }}</span>
                     </div>
 
                     <div

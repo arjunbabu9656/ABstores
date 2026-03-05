@@ -50,13 +50,13 @@
 
                     <div style="margin-top: 1rem;">
                         {% if product.discount > 0 %}
-                        <span style="font-size: 1.25rem; font-weight: 700; color: var(--text-main);">${{
+                        <span style="font-size: 1.25rem; font-weight: 700; color: var(--text-main);">₹{{
                             product.get_discounted_price }}</span>
                         <span
-                            style="font-size: 0.875rem; color: var(--text-muted); text-decoration: line-through; margin-left: 0.5rem;">${{
+                            style="font-size: 0.875rem; color: var(--text-muted); text-decoration: line-through; margin-left: 0.5rem;">₹{{
                             product.price }}</span>
                         {% else %}
-                        <span style="font-size: 1.25rem; font-weight: 700; color: var(--text-main);">${{ product.price
+                        <span style="font-size: 1.25rem; font-weight: 700; color: var(--text-main);">₹{{ product.price
                             }}</span>
                         {% endif %}
                     </div>
