@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="section-content" style="padding: 2rem 0;">
+    <div class="row" style="display: flex; gap: 2rem; flex-wrap: wrap;">
+        <main style="flex: 2; min-width: 300px;">
+            <div class="card"
+                style="background: white; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); overflow: hidden;">
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead style="background: var(--bg-main); border-bottom: 1px solid var(--border-color);">
+                        <tr>
+                            <th style="padding: 1rem; text-align: left; color: var(--text-muted);">Product</th>
+                            <th style="padding: 1rem; width: 120px; text-align: center; color: var(--text-muted);">
+                                Quantity</th>
+                            <th style="padding: 1rem; width: 120px; text-align: right; color: var(--text-muted);">Price
+                            </th>
+                            <th style="padding: 1rem; width: 80px; text-align: center;"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if not cart_items %}
+                        <tr>
+                            <td colspan="4" style="padding: 3rem; text-align: center; color: var(--text-muted);">
+                                <h3 style="margin-bottom: 1rem;">Your shopping cart is empty</h3>
+                                <a href="{% url 'store' %}" class="btn btn-primary">Continue Shopping</a>
+                            </td>
+                        </tr>
+                        {% else %}
+                        {% for cart_item in cart_items %}
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 1rem;">
+                                <div style="display: flex; align-items: center; gap: 1rem;">
+                                    <div
+                                        style="width: 80px; height: 80px; flex-shrink: 0; background: #F3F4F6; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                                        {% if cart_item.product.images.first %}
+                                        <img src="{{ cart_item.product.images.first.image.url }}"
+                                            alt="{{ cart_item.product.name }}"
+                                            style="width: 100%; height: 100%; object-fit: cover;">
+                                        {% else %}
+                                        <span style="font-size: 0.75rem; color: #9CA3AF;">No Image</span>
+                                        {% endif %}
+                                    </div>
+                                    <div>
+                                        <a href="{{ cart_item.product.get_url }}"
+                                            style="font-weight: 600; color: var(--text-main); font-size: 1.1rem;">{{ cart_item.product.name }}</a>
+                                        <p style="color: var(--text-muted); font-size: 0.875rem; margin-top: 0.25rem;">
+                                            Category: {{ cart_item.product.category.name }}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="padding: 1rem; text-align: center;">
+                                <div
+                                    style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; background: var(--bg-main); border-radius: var(--radius-md); padding: 0.25rem;">
+                                    <a href="{% url 'remove_cart' cart_item.product.id %}"
+                                        style="padding: 0.25rem 0.5rem; background: white; border-radius: 4px; box-shadow: var(--shadow-sm); text-align: center;">-</a>
+                                    <span style="width: 30px; text-align: center; font-weight: 600;">{{ cart_item.quantity }}</span>
+                                    <a href="{% url 'add_cart' cart_item.product.id %}"
+                                        style="padding: 0.25rem 0.5rem; background: white; border-radius: 4px; box-shadow: var(--shadow-sm); text-align: center;">+</a>
+                                </div>
+                            </td>
+                            <td style="padding: 1rem; text-align: right;">
+                                <div style="font-weight: 700; font-size: 1.1rem;">${{ cart_item.sub_total }}</div>
+                                <small style="color: var(--text-muted);">${{ cart_item.product.get_discounted_price }}
+                                    each</small>
+                            </td>
+                            <td style="padding: 1rem; text-align: center;">
+                                <a href="{% url 'remove_cart_item' cart_item.product.id %}"
+                                    style="color: var(--error-color); padding: 0.5rem; border-radius: var(--radius-md); display: inline-block; transition: background 0.3s;"
+                                    onmouseover="this.style.background='#FEE2E2'"
+                                    onmouseout="this.style.background='transparent'">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="3 6 5 6 21 6"></polyline>
+                                        <path
+                                            d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                        </path>
+                                    </svg>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </main>
+
+        <aside style="flex: 1; min-width: 300px;">
+            <div class="card"
+                style="background: white; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); padding: 1.5rem;">
+                <h3
+                    style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-color);">
+                    Order Summary</h3>
+
+                <div
+                    style="display: flex; justify-content: space-between; margin-bottom: 1rem; color: var(--text-muted);">
+                    <span>Subtotal:</span>
+                    <span style="font-weight: 600; color: var(--text-main);">${{ total }}</span>
+                </div>
+
+                <div
+                    style="display: flex; justify-content: space-between; margin-bottom: 1.5rem; color: var(--text-muted);">
+                    <span>Tax (Store):</span>
+                    <span style="font-weight: 600; color: var(--text-main);">${{ tax }}</span>
+                </div>
+
+                <div
+                    style="display: flex; justify-content: space-between; margin-bottom: 2rem; border-top: 1px solid var(--border-color); padding-top: 1rem; font-size: 1.25rem; font-weight: 700;">
+                    <span>Total:</span>
+                    <span>${{ grand_total }}</span>
+                </div>
+
+                {% if cart_items %}
+                <a href="{% url 'checkout' %}" class="btn btn-primary"
+                    style="width: 100%; display: block; padding: 1rem; font-size: 1.1rem; text-align: center; margin-bottom: 1rem;">Proceed
+                    to Checkout</a>
+                <a href="{% url 'store' %}" class="btn btn-outline"
+                    style="width: 100%; display: block; text-align: center; padding: 1rem;">Continue Shopping</a>
+                {% endif %}
+            </div>
+        </aside>
+    </div>
+</section>
+{% endblock %}

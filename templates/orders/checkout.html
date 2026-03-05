@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="section-content" style="padding: 2rem 0;">
+    <form action="{% url 'place_order' %}" method="POST">
+        {% csrf_token %}
+        <div class="row" style="display: flex; gap: 2rem; flex-wrap: wrap;">
+
+            <main style="flex: 2; min-width: 300px;">
+                <div class="card"
+                    style="background: white; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); padding: 2.5rem; margin-bottom: 2rem;">
+                    <h3
+                        style="font-size: 1.5rem; font-weight: 600; margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
+                        Shipping Details</h3>
+
+                    <div style="display: flex; gap: 1.5rem; margin-bottom: 1.5rem;">
+                        <div class="form-group" style="flex: 1; margin-bottom: 0;">
+                            <label class="form-label" for="first_name">First Name</label>
+                            <input type="text" class="form-control" name="first_name" id="first_name" required>
+                        </div>
+                        <div class="form-group" style="flex: 1; margin-bottom: 0;">
+                            <label class="form-label" for="last_name">Last Name</label>
+                            <input type="text" class="form-control" name="last_name" id="last_name" required>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 1.5rem; margin-bottom: 1.5rem;">
+                        <div class="form-group" style="flex: 1; margin-bottom: 0;">
+                            <label class="form-label" for="email">Email</label>
+                            <input type="email" class="form-control" name="email" id="email" required
+                                value="{{ request.user.email }}">
+                        </div>
+                        <div class="form-group" style="flex: 1; margin-bottom: 0;">
+                            <label class="form-label" for="phone">Phone Number</label>
+                            <input type="text" class="form-control" name="phone" id="phone" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 1.5rem;">
+                        <label class="form-label" for="address_line_1">Address Line 1</label>
+                        <input type="text" class="form-control" name="address_line_1" id="address_line_1" required>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 1.5rem;">
+                        <label class="form-label" for="address_line_2">Address Line 2 (Optional)</label>
+                        <input type="text" class="form-control" name="address_line_2" id="address_line_2">
+                    </div>
+
+                    <div style="display: flex; gap: 1.5rem; margin-bottom: 1.5rem;">
+                        <div class="form-group" style="flex: 1; margin-bottom: 0;">
+                            <label class="form-label" for="city">City</label>
+                            <input type="text" class="form-control" name="city" id="city" required>
+                        </div>
+                        <div class="form-group" style="flex: 1; margin-bottom: 0;">
+                            <label class="form-label" for="state">State/Province</label>
+                            <input type="text" class="form-control" name="state" id="state" required>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 1.5rem;">
+                        <div class="form-group" style="flex: 1; margin-bottom: 0;">
+                            <label class="form-label" for="country">Country</label>
+                            <input type="text" class="form-control" name="country" id="country" required>
+                        </div>
+                        <div class="form-group" style="flex: 1; margin-bottom: 0;">
+                            <label class="form-label" for="pincode">Postal / Zip Code</label>
+                            <input type="text" class="form-control" name="pincode" id="pincode" required>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <aside style="flex: 1; min-width: 300px;">
+                <div class="card"
+                    style="background: white; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); padding: 1.5rem;">
+                    <h3
+                        style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-color);">
+                        Order Summary</h3>
+
+                    <table style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem;">
+                        <tbody>
+                            {% for cart_item in cart_items %}
+                            <tr>
+                                <td style="padding: 0.5rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                                    {% if cart_item.product.images.first %}
+                                    <img src="{{ cart_item.product.images.first.image.url }}" alt="Product"
+                                        style="width: 40px; height: 40px; object-fit: cover; border-radius: 4px;">
+                                    {% endif %}
+                                    <span style="font-weight: 500;">{{ cart_item.product.name }} <small
+                                            style="color: var(--text-muted);">&times; {{ cart_item.quantity
+                                            }}</small></span>
+                                </td>
+                                <td style="padding: 0.5rem 0; text-align: right; font-weight: 600;">
+                                    ${{ cart_item.sub_total }}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <div
+                        style="display: flex; justify-content: space-between; margin-bottom: 0.75rem; color: var(--text-muted);">
+                        <span>Subtotal:</span>
+                        <span style="font-weight: 600; color: var(--text-main);">${{ total }}</span>
+                    </div>
+
+                    <div
+                        style="display: flex; justify-content: space-between; margin-bottom: 1.25rem; color: var(--text-muted);">
+                        <span>Tax:</span>
+                        <span style="font-weight: 600; color: var(--text-main);">${{ tax }}</span>
+                    </div>
+
+                    <div
+                        style="display: flex; justify-content: space-between; margin-bottom: 2rem; border-top: 1px solid var(--border-color); padding-top: 1rem; font-size: 1.25rem; font-weight: 700;">
+                        <span>Total:</span>
+                        <span>${{ grand_total }}</span>
+                    </div>
+
+                    <div
+                        style="background: var(--bg-main); padding: 1rem; border-radius: var(--radius-md); margin-bottom: 2rem; border: 1px solid var(--border-color);">
+                        <label
+                            style="display: flex; align-items: center; gap: 0.5rem; font-weight: 600; cursor: pointer;">
+                            <input type="radio" name="payment_method" value="COD" checked> Cash on Delivery (COD)
+                        </label>
+                        <p
+                            style="margin-left: 1.5rem; margin-top: 0.25rem; font-size: 0.875rem; color: var(--text-muted);">
+                            Pay with cash upon delivery.</p>
+                    </div>
+
+                    {% if not request.user.is_authenticated %}
+                    <div class="alert alert-error" style="margin-bottom: 1rem;">
+                        <b>You must be logged in to checkout!</b> <br> <a
+                            href="{% url 'login' %}?next={% url 'checkout' %}"
+                            style="text-decoration: underline; font-weight: bold;">Login here</a>
+                    </div>
+                    {% else %}
+                    <button type="submit" name="submit" class="btn btn-primary"
+                        style="width: 100%; display: block; padding: 1rem; font-size: 1.1rem; text-align: center;">Place
+                        Order (COD)</button>
+                    <a href="{% url 'store' %}" class="btn btn-outline mt-4"
+                        style="width: 100%; display: block; text-align: center; padding: 1rem;">Continue Shopping</a>
+                    {% endif %}
+                </div>
+            </aside>
+
+        </div>
+    </form>
+</section>
+{% endblock %}

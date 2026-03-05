@@ -1,0 +1,35 @@
+<header class="navbar">
+    <a href="/" class="brand">ABStore</a>
+
+    <div class="search-bar" style="flex: 0 1 400px; display: flex;">
+        <form action="/store/search/" method="GET" style="display: flex; width: 100%;">
+            <input type="text" name="keyword" class="form-control" placeholder="Search products..."
+                style="border-right: none; border-top-right-radius: 0; border-bottom-right-radius: 0;">
+            <button type="submit" class="btn btn-primary"
+                style="border-top-left-radius: 0; border-bottom-left-radius: 0;">Search</button>
+        </form>
+    </div>
+
+    <nav class="nav-links">
+        <a href="/">Home</a>
+        <a href="/store/">Store</a>
+
+        {% if user.is_authenticated %}
+        <a href="/accounts/dashboard/">Welcome, {{ user.first_name|default:user.username }}</a>
+        <a href="/accounts/logout/">Logout</a>
+        {% else %}
+        <a href="/accounts/login/">Login</a>
+        <a href="/accounts/register/" class="btn btn-primary">Sign Up</a>
+        {% endif %}
+
+        <a href="/cart/" class="nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <span class="badge" id="cart-count">0</span>
+        </a>
+    </nav>
+</header>
