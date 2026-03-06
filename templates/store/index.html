@@ -28,8 +28,7 @@
             {% endif %}
         </a>
         <div style="padding: 1.5rem;">
-            <div style="font-size: 0.875rem; color: var(--primary-color); margin-bottom: 0.5rem; font-weight: 600;">{{
-                product.category.name }}</div>
+            <div style="font-size: 0.875rem; color: var(--primary-color); margin-bottom: 0.5rem; font-weight: 600;">{{ product.category.name }}</div>
             <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem;">
                 <a href="{{ product.get_url }}" style="color: var(--text-main);">{{ product.name }}</a>
             </h3>
@@ -37,14 +36,11 @@
             <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
                 <div>
                     {% if product.discount > 0 %}
-                    <span style="font-size: 1.25rem; font-weight: 700; color: var(--text-main);">₹{{
-                        product.get_discounted_price }}</span>
+                    <span style="font-size: 1.25rem; font-weight: 700; color: var(--text-main);">₹{{ product.get_discounted_price }}</span>
                     <span
-                        style="font-size: 0.875rem; color: var(--text-muted); text-decoration: line-through; margin-left: 0.5rem;">₹{{
-                        product.price }}</span>
+                        style="font-size: 0.875rem; color: var(--text-muted); text-decoration: line-through; margin-left: 0.5rem;">₹{{ product.price }}</span>
                     {% else %}
-                    <span style="font-size: 1.25rem; font-weight: 700; color: var(--text-main);">₹{{ product.price
-                        }}</span>
+                    <span style="font-size: 1.25rem; font-weight: 700; color: var(--text-main);">₹{{ product.price }}</span>
                     {% endif %}
                 </div>
                 <a href="{% url 'add_cart' product.id %}" class="btn btn-primary" style="padding: 0.5rem 1rem;">Add to

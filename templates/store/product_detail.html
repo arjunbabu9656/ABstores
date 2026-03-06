@@ -30,15 +30,12 @@
     <!-- Product Info -->
     <div class="info" style="flex: 1; min-width: 300px; display: flex; flex-direction: column;">
         <h1 style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">{{ single_product.name }}</h1>
-        <div style="color: var(--primary-color); font-weight: 500; margin-bottom: 1rem;">{{ single_product.category.name
-            }}</div>
+        <div style="color: var(--primary-color); font-weight: 500; margin-bottom: 1rem;">{{ single_product.category.name }}</div>
 
         <div style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem;">
             {% if single_product.discount > 0 %}
-            <span style="font-size: 2rem; font-weight: 700; color: var(--text-main);">₹{{
-                single_product.get_discounted_price }}</span>
-            <span style="font-size: 1.25rem; color: var(--text-muted); text-decoration: line-through;">₹{{
-                single_product.price }}</span>
+            <span style="font-size: 2rem; font-weight: 700; color: var(--text-main);">₹{{ single_product.get_discounted_price }}</span>
+            <span style="font-size: 1.25rem; color: var(--text-muted); text-decoration: line-through;">₹{{ single_product.price }}</span>
             {% else %}
             <span style="font-size: 2rem; font-weight: 700; color: var(--text-main);">₹{{ single_product.price }}</span>
             {% endif %}
@@ -86,8 +83,7 @@
                 <strong>{{ review.user.username }}</strong>
                 <span style="color: #FBBF24;">{'★'|ljust:review.rating|replace:' ','★'}{'☆'|rjust:5|replace:'
                     ','☆'|slice:review.rating:5}</span>
-                <span style="color: var(--text-muted); font-size: 0.875rem;">{{ review.created_at|date:"M d, Y"
-                    }}</span>
+                <span style="color: var(--text-muted); font-size: 0.875rem;">{{ review.created_at|date:"M d, Y" }}</span>
             </div>
             <p style="color: var(--text-muted);">{{ review.comment }}</p>
         </div>

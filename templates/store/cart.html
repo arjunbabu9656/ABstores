@@ -43,8 +43,7 @@
                                     </div>
                                     <div>
                                         <a href="{{ cart_item.product.get_url }}"
-                                            style="font-weight: 600; color: var(--text-main); font-size: 1.1rem;">{{
-                                            cart_item.product.name }}</a>
+                                            style="font-weight: 600; color: var(--text-main); font-size: 1.1rem;">{{ cart_item.product.name }}</a>
                                         <p style="color: var(--text-muted); font-size: 0.875rem; margin-top: 0.25rem;">
                                             Category: {{ cart_item.product.category.name }}</p>
                                     </div>
@@ -55,8 +54,7 @@
                                     style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; background: var(--bg-main); border-radius: var(--radius-md); padding: 0.25rem;">
                                     <a href="{% url 'remove_cart' cart_item.product.id %}"
                                         style="padding: 0.25rem 0.5rem; background: var(--bg-card); border-radius: 4px; box-shadow: var(--shadow-sm); text-align: center;">-</a>
-                                    <span style="width: 30px; text-align: center; font-weight: 600;">{{
-                                        cart_item.quantity }}</span>
+                                    <span style="width: 30px; text-align: center; font-weight: 600;">{{ cart_item.quantity }}</span>
                                     <a href="{% url 'add_cart' cart_item.product.id %}"
                                         style="padding: 0.25rem 0.5rem; background: var(--bg-card); border-radius: 4px; box-shadow: var(--shadow-sm); text-align: center;">+</a>
                                 </div>
