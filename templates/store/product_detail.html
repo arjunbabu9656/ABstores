@@ -3,11 +3,11 @@
 
 {% block content %}
 <div class="product-detail"
-    style="background: white; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); padding: 2rem; display: flex; gap: 3rem; flex-wrap: wrap;">
+    style="background: var(--bg-card); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); padding: 2rem; display: flex; gap: 3rem; flex-wrap: wrap;">
     <!-- Product Gallery -->
     <div class="gallery" style="flex: 1; min-width: 300px;">
         <div class="main-image"
-            style="margin-bottom: 1rem; border-radius: var(--radius-md); overflow: hidden; background: #F3F4F6;">
+            style="margin-bottom: 1rem; border-radius: var(--radius-md); overflow: hidden; background: var(--bg-main);">
             {% if single_product.images.first %}
             <img id="mainImage" src="{{ single_product.images.first.image.url }}" alt="{{ single_product.name }}"
                 style="width: 100%; height: auto; display: block;">
@@ -53,7 +53,7 @@
                 style="color: var(--error-color); font-weight: 600; font-size: 1.25rem; margin-bottom: 1rem;">Out of
                 Stock</h5>
                 <button disabled
-                    style="background:#E5E7EB; border:none; padding:1rem 2rem; color:#9CA3AF; border-radius:var(--radius-md); font-weight:600; width:100%; cursor:not-allowed;">Add
+                    style="background: var(--border-color); border:none; padding:1rem 2rem; color:#9CA3AF; border-radius:var(--radius-md); font-weight:600; width:100%; cursor:not-allowed;">Add
                     to Cart</button>
                 {% else %}
                 {% if in_cart %}
@@ -73,7 +73,7 @@
 </div>
 
 <div
-    style="margin-top: 3rem; background: white; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); padding: 2rem;">
+    style="margin-top: 3rem; background: var(--bg-card); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); padding: 2rem;">
     <h3
         style="font-size: 1.5rem; font-weight: 600; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 1.5rem;">
         Customer Reviews</h3>

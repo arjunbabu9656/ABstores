@@ -13,11 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Scroll Animations using Intersection Observer
-    const animatedElements = document.querySelectorAll('.card, .hero-section, .alert');
+    const animatedElements = document.querySelectorAll('.card, .hero-section, .alert, .slide-in-left, .slide-in-right, .store-sidebar');
 
     // Add the animation class to elements
     animatedElements.forEach((el, index) => {
-        el.classList.add('animate-on-scroll');
+        if (!el.classList.contains('slide-in-left') && !el.classList.contains('slide-in-right')) {
+            el.classList.add('animate-on-scroll');
+        }
+
         // Add staggered delay to cards in a grid
         if (el.classList.contains('card')) {
             const delay = (index % 4) * 100; // 0, 100, 200, 300ms

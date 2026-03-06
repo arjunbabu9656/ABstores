@@ -1,19 +1,23 @@
 :root {
-    --primary-color: #4F46E5;
-    --primary-hover: #4338CA;
+    --primary-color: #6366f1;
+    --primary-hover: #818cf8;
     --secondary-color: #10B981;
-    --text-main: #1F2937;
-    --text-muted: #6B7280;
-    --bg-main: #F9FAFB;
-    --bg-card: #FFFFFF;
-    --border-color: #E5E7EB;
+    --text-main: #F9FAFB;
+    --text-muted: #9CA3AF;
+    --bg-main: #111827;
+    --bg-card: #1F2937;
+    --border-color: #374151;
     --error-color: #EF4444;
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
     --radius-md: 0.5rem;
     --radius-lg: 1rem;
     --transition: all 0.3s ease;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 * {
@@ -178,13 +182,15 @@ img {
 }
 
 .alert-success {
-    background-color: #D1FAE5;
-    color: #065F46;
+    background-color: rgba(16, 185, 129, 0.1);
+    color: #34D399;
+    border: 1px solid rgba(16, 185, 129, 0.2);
 }
 
 .alert-error {
-    background-color: #FEE2E2;
-    color: #991B1B;
+    background-color: rgba(239, 68, 68, 0.1);
+    color: #F87171;
+    border: 1px solid rgba(239, 68, 68, 0.2);
 }
 
 /* Utilities */
@@ -253,13 +259,35 @@ img {
 /* Scroll Animation Classes */
 .animate-on-scroll {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(30px) scale(0.95);
     transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .animate-on-scroll.is-visible {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+}
+
+.slide-in-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.slide-in-left.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.slide-in-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.slide-in-right.is-visible {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 /* Staggered delays for grid items */
