@@ -6,7 +6,7 @@
     <div class="row" style="display: flex; gap: 2rem; flex-wrap: wrap;">
         <main style="flex: 2; min-width: 300px;">
             <div class="card"
-                style="background: var(--bg-card); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); overflow: hidden;">
+                style="background: var(--bg-card); border: 1px solid var(--glass-border); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); overflow: hidden;">
                 <table style="width: 100%; border-collapse: collapse;">
                     <thead style="background: var(--bg-main); border-bottom: 1px solid var(--border-color);">
                         <tr>
@@ -53,10 +53,10 @@
                                 <div
                                     style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; background: var(--bg-main); border-radius: var(--radius-md); padding: 0.25rem;">
                                     <a href="{% url 'remove_cart' cart_item.product.id %}"
-                                        style="padding: 0.25rem 0.5rem; background: var(--bg-card); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 4px; box-shadow: var(--shadow-sm); text-align: center;">-</a>
+                                        style="padding: 0.25rem 0.5rem; background: var(--bg-card); border: 1px solid var(--glass-border); border-radius: 4px; box-shadow: var(--shadow-sm); text-align: center;">-</a>
                                     <span style="width: 30px; text-align: center; font-weight: 600;">{{ cart_item.quantity }}</span>
                                     <a href="{% url 'add_cart' cart_item.product.id %}"
-                                        style="padding: 0.25rem 0.5rem; background: var(--bg-card); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 4px; box-shadow: var(--shadow-sm); text-align: center;">+</a>
+                                        style="padding: 0.25rem 0.5rem; background: var(--bg-card); border: 1px solid var(--glass-border); border-radius: 4px; box-shadow: var(--shadow-sm); text-align: center;">+</a>
                                 </div>
                             </td>
                             <td style="padding: 1rem; text-align: right;">
@@ -88,7 +88,7 @@
 
         <aside style="flex: 1; min-width: 300px;">
             <div class="card"
-                style="background: var(--bg-card); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); padding: 1.5rem;">
+                style="background: var(--bg-card); border: 1px solid var(--glass-border); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); padding: 1.5rem;">
                 <h3
                     style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-color);">
                     Order Summary</h3>

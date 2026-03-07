@@ -2,12 +2,13 @@
 {% load static %}
 
 {% block content %}
-<div class="hero-section"
-    style="background-color: var(--primary-color); color: white; padding: 4rem 2rem; border-radius: var(--radius-lg); margin-bottom: 3rem; text-align: center;">
-    <h1 style="font-size: 3rem; margin-bottom: 1rem; font-weight: 700;">Discover Premium Quality</h1>
-    <p style="font-size: 1.25rem; margin-bottom: 2rem; opacity: 0.9;">Shop the best products carefully curated for your
-        luxury lifestyle.</p>
-    <a href="{% url 'store' %}" class="btn btn-secondary" style="font-size: 1.1rem; padding: 1rem 2.5rem;">Shop Now</a>
+<div class="hero-section hero-animated slide-in-left"
+    style="color: white; padding: 3rem 1.5rem; border-radius: 0; margin-bottom: 2rem; margin-top: -2rem; text-align: center;">
+    <h1 style="font-size: 2.25rem; margin-bottom: 0.5rem; font-weight: 700;">Discover Premium Quality</h1>
+    <p style="font-size: 1rem; margin-bottom: 1.5rem; opacity: 0.9;">Shop the best products carefully curated for your
+        lifestyle.</p>
+    <a href="{% url 'store' %}" class="btn btn-secondary"
+        style="font-size: 1rem; padding: 0.75rem 2rem; border-radius: 2px;">Shop Now</a>
 </div>
 
 <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 2rem; text-align: center;">Featured Products</h2>
@@ -16,7 +17,7 @@
     style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem;">
     {% for product in products %}
     <div class="card"
-        style="background: var(--bg-card); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: var(--radius-md); box-shadow: var(--shadow-md); overflow: hidden; transition: var(--transition);">
+        style="background: var(--bg-card); border: 1px solid var(--glass-border); border-radius: var(--radius-md); box-shadow: var(--shadow-md); overflow: hidden; transition: var(--transition);">
         <a href="{{ product.get_url }}">
             {% if product.images.first %}
             <img src="{{ product.images.first.image.url }}" alt="{{ product.name }}"
@@ -28,7 +29,8 @@
             {% endif %}
         </a>
         <div style="padding: 1.5rem;">
-            <div style="font-size: 0.875rem; color: var(--primary-color); margin-bottom: 0.5rem; font-weight: 600;">{{ product.category.name }}</div>
+            <div style="font-size: 0.875rem; color: var(--primary-color); margin-bottom: 0.5rem; font-weight: 600;">{{
+                product.category.name }}</div>
             <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem;">
                 <a href="{{ product.get_url }}" style="color: var(--text-main);">{{ product.name }}</a>
             </h3>
@@ -36,11 +38,14 @@
             <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
                 <div>
                     {% if product.discount > 0 %}
-                    <span style="font-size: 1.25rem; font-weight: 700; color: var(--text-main);">₹{{ product.get_discounted_price }}</span>
+                    <span style="font-size: 1.25rem; font-weight: 700; color: var(--text-main);">₹{{
+                        product.get_discounted_price }}</span>
                     <span
-                        style="font-size: 0.875rem; color: var(--text-muted); text-decoration: line-through; margin-left: 0.5rem;">₹{{ product.price }}</span>
+                        style="font-size: 0.875rem; color: var(--text-muted); text-decoration: line-through; margin-left: 0.5rem;">₹{{
+                        product.price }}</span>
                     {% else %}
-                    <span style="font-size: 1.25rem; font-weight: 700; color: var(--text-main);">₹{{ product.price }}</span>
+                    <span style="font-size: 1.25rem; font-weight: 700; color: var(--text-main);">₹{{ product.price
+                        }}</span>
                     {% endif %}
                 </div>
                 <a href="{% url 'add_cart' product.id %}" class="btn btn-primary" style="padding: 0.5rem 1rem;">Add to
@@ -50,7 +55,7 @@
     </div>
     {% empty %}
     <div
-        style="grid-column: 1 / -1; text-align: center; padding: 3rem; background: var(--bg-card); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: var(--radius-md);">
+        style="grid-column: 1 / -1; text-align: center; padding: 3rem; background: var(--bg-card); border: 1px solid var(--glass-border); border-radius: var(--radius-md);">
         <h3 style="color: var(--text-muted); margin-bottom: 1rem;">No products available right now.</h3>
         <p>Check back later for exciting new items.</p>
     </div>
