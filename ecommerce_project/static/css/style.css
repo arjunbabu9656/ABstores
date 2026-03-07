@@ -1,26 +1,20 @@
 :root {
-    --primary-color: #2874f0;
-    /* Flipkart Blue */
-    --primary-hover: #0056D4;
-    --secondary-color: #ff9f00;
-    /* Flipkart/Amazon Orange/Yellow */
-    --text-main: #212121;
-    --text-muted: #878787;
-    --bg-main: #f1f3f6;
-    /* Classic E-commerce Light Gray Background */
-    --bg-card: #ffffff;
-    /* Solid White Cards */
-    --glass-border: #e0e0e0;
-    --border-color: #e0e0e0;
-    --error-color: #ff6161;
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
-    /* Lighter shadows for clean look */
-    --shadow-lg: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    --radius-md: 2px;
-    /* Sharper corners like traditional stores */
-    --radius-lg: 4px;
-    --transition: all 0.2s ease;
+    --primary-color: #6366f1;
+    --primary-hover: #818cf8;
+    --secondary-color: #10B981;
+    --text-main: #F9FAFB;
+    --text-muted: #9CA3AF;
+    --bg-main: #0B0F19;
+    --bg-card: rgba(31, 41, 55, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --border-color: #374151;
+    --error-color: #EF4444;
+    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    --radius-md: 0.5rem;
+    --radius-lg: 1rem;
+    --transition: all 0.3s ease;
 }
 
 html {
@@ -34,9 +28,13 @@ html {
 }
 
 body {
-    font-family: 'Roboto', 'Inter', sans-serif;
+    font-family: 'Inter', sans-serif;
     color: var(--text-main);
     background-color: var(--bg-main);
+    background-image:
+        radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.15), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(16, 185, 129, 0.15), transparent 25%);
+    background-attachment: fixed;
     line-height: 1.5;
     display: flex;
     flex-direction: column;
@@ -105,9 +103,10 @@ img {
 
 /* Navbar */
 .navbar {
-    background-color: var(--primary-color);
-    color: white;
-    box-shadow: var(--shadow-sm);
+    background-color: rgba(17, 24, 39, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--glass-border);
     padding: 1rem 2rem;
     display: flex;
     align-items: center;
@@ -119,7 +118,7 @@ img {
 .brand {
     font-size: 1.5rem;
     font-weight: 700;
-    color: white;
+    color: var(--primary-color);
 }
 
 .nav-links {
@@ -128,12 +127,8 @@ img {
     align-items: center;
 }
 
-.nav-links a {
-    color: white;
-}
-
 .nav-links a:hover {
-    color: var(--secondary-color);
+    color: var(--primary-color);
 }
 
 .nav-icon {
@@ -237,14 +232,16 @@ img {
 /* Enhancing Hover States */
 .card {
     background: var(--bg-card) !important;
-    border: 1px solid var(--border-color);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s ease;
 }
 
 .card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-xl, 0 8px 16px rgba(0, 0, 0, 0.1));
-    border-color: transparent;
+    transform: scale(1.05) translateY(-12px);
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
 }
 
 .card img {
@@ -257,15 +254,36 @@ img {
 
 @media (min-width: 769px) {
     .card.card-clicked {
-        transform: scale(1.02) !important;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+        transform: scale(1.05) translateY(-8px) !important;
+        box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.9) !important;
+        border-color: rgba(255, 255, 255, 0.25) !important;
         z-index: 50;
     }
 }
 
-/* Standard Hero Section */
+/* Animated Gradient Hero Section */
 .hero-animated {
-    background-color: var(--primary-color);
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #2563eb 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 8s ease infinite;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 40px -10px rgba(79, 70, 229, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .btn {
@@ -343,8 +361,7 @@ img {
 
 @media (max-width: 768px) {
     .main-content {
-        padding: 0.5rem;
-        /* Tighter padding for mobile apps */
+        padding: 1rem;
     }
 
     /* Navbar Mobile Styles */
@@ -414,42 +431,10 @@ img {
         margin-bottom: 1.5rem;
     }
 
-    /* Product Grid - STRICT 2 COLUMN MOBILE */
+    /* Product Grid */
     .product-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 0.5rem !important;
-        /* Tighter gaps like Flipkart/Amazon */
-    }
-
-    .card {
-        border-radius: 4px;
-        /* Simpler borders on mobile */
-    }
-
-    .card img {
-        height: 150px !important;
-        /* Shorter images on mobile */
-    }
-
-    .card>div {
-        padding: 0.75rem !important;
-        /* Tighter text padding */
-    }
-
-    .card h3 {
-        font-size: 0.9rem !important;
-        /* Smaller titles */
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    .card .btn-primary {
-        font-size: 0.8rem;
-        padding: 0.4rem;
-        width: 100%;
-        /* Full width add to cart button */
-        margin-top: 0.5rem;
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
     }
 
     /* Cart Specifics */
