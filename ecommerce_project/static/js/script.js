@@ -47,4 +47,14 @@ document.addEventListener('DOMContentLoaded', () => {
     animatedElements.forEach(el => {
         scrollObserver.observe(el);
     });
+
+    // Card Click Animation (Desktop Only)
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+        card.addEventListener('click', () => {
+            if (window.innerWidth > 768) {
+                card.classList.add('card-clicked');
+            }
+        });
+    });
 });

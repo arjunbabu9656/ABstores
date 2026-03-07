@@ -244,6 +244,15 @@ img {
     box-shadow: 0 15px 35px -10px rgba(99, 102, 241, 0.4);
 }
 
+@media (min-width: 769px) {
+    .card.card-clicked {
+        transform: scale(1.05) translateY(-8px) !important;
+        box-shadow: 0 25px 50px -12px rgba(99, 102, 241, 0.6) !important;
+        border-color: rgba(99, 102, 241, 0.8) !important;
+        z-index: 50;
+    }
+}
+
 /* Animated Gradient Hero Section */
 .hero-animated {
     background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #2563eb 100%);
