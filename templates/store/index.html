@@ -16,7 +16,7 @@
     style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem;">
     {% for product in products %}
     <div class="card"
-        style="background: var(--bg-card); border-radius: var(--radius-md); box-shadow: var(--shadow-md); overflow: hidden; transition: var(--transition);">
+        style="background: var(--bg-card); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: var(--radius-md); box-shadow: var(--shadow-md); overflow: hidden; transition: var(--transition);">
         <a href="{{ product.get_url }}">
             {% if product.images.first %}
             <img src="{{ product.images.first.image.url }}" alt="{{ product.name }}"
@@ -50,7 +50,7 @@
     </div>
     {% empty %}
     <div
-        style="grid-column: 1 / -1; text-align: center; padding: 3rem; background: var(--bg-card); border-radius: var(--radius-md);">
+        style="grid-column: 1 / -1; text-align: center; padding: 3rem; background: var(--bg-card); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: var(--radius-md);">
         <h3 style="color: var(--text-muted); margin-bottom: 1rem;">No products available right now.</h3>
         <p>Check back later for exciting new items.</p>
     </div>
