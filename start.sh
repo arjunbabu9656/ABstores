@@ -2,12 +2,16 @@
 # Apply database migrations
 python manage.py migrate
 
-# Create a default superuser if it doesn't exist
+# Create a default superuser if it doesn't exist, and force reset password to admin123
 python manage.py shell -c "
 from django.contrib.auth import get_user_model
 User = get_user_model()
 if not User.objects.filter(username='admin').exists():
-    User.objects.create_superuser('admin', 'admin@example.com', 'admin')
+    User.objects.create_superuser('admin', 'admin@example.com', 'admin123')
+else:
+    u = User.objects.get(username='admin')
+    u.set_password('admin123')
+    u.save()
 "
 
 # Create a demo product so the homepage isn't empty and doesn't crash
