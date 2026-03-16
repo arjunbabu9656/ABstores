@@ -95,17 +95,15 @@ DATABASES = {
     }
 }
 
-# Override database settings with DATABASE_URL if in production
-if 'RENDER' in os.environ:
-    # On Render, fallback to SQLite if no database URL is set so the app doesn't crash 
+# Universal Database Configuration: prioritizes DATABASE_URL (for Neon/Render)
+if os.environ.get('DATABASE_URL'):
+    DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+elif 'RENDER' in os.environ:
+    # Fallback for Render if for some reason DATABASE_URL is missing
     DATABASES['default'] = dj_database_url.config(
         default='sqlite:///' + str(BASE_DIR / 'db.sqlite3'),
         conn_max_age=600
     )
-else:
-    if 'DATABASE_URL' in os.environ:
-        db_from_env = dj_database_url.config(conn_max_age=600)
-        DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
