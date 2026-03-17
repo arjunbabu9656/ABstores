@@ -98,15 +98,15 @@ DATABASES = {
 }
 
 # Universal Database Configuration
-if os.environ.get('DATABASE_URL') and 'render.com' not in os.environ.get('DATABASE_URL', ''):
-    # Use external DB (like Neon.tech) if the URL is provided and isn't a stale Render link
+if 'RENDER' in os.environ:
+    # FORCE SQLite on Render for a clean, code-driven starting point as requested
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+elif os.environ.get('DATABASE_URL'):
+    # Use external DB (like Neon.tech) only if NOT on Render, or if manually configured elsewhere
     DATABASES['default'] = dj_database_url.config(conn_max_age=600)
-elif 'RENDER' in os.environ:
-    # Always prioritize SQLite on Render for a clean start as requested
-    DATABASES['default'] = dj_database_url.config(
-        default='sqlite:///' + str(BASE_DIR / 'db.sqlite3'),
-        conn_max_age=600
-    )
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
