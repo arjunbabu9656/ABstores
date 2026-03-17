@@ -97,11 +97,12 @@ DATABASES = {
     }
 }
 
-# Universal Database Configuration: prioritizes DATABASE_URL (for Neon/Render)
-if os.environ.get('DATABASE_URL'):
+# Universal Database Configuration
+if os.environ.get('DATABASE_URL') and 'render.com' not in os.environ.get('DATABASE_URL', ''):
+    # Use external DB (like Neon.tech) if the URL is provided and isn't a stale Render link
     DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 elif 'RENDER' in os.environ:
-    # Fallback for Render if for some reason DATABASE_URL is missing
+    # Always prioritize SQLite on Render for a clean start as requested
     DATABASES['default'] = dj_database_url.config(
         default='sqlite:///' + str(BASE_DIR / 'db.sqlite3'),
         conn_max_age=600
